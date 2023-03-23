@@ -50,14 +50,14 @@ class Gym(Env):
         :param actions: An object containing actions, in the format specified by the `ActionParser`.
         :return: A tuple containing (obs, rewards, done, info)
         """
-
+        prev_model_actions = actions
         actions = self._match.format_actions(self._match.parse_actions(actions, self._prev_state))
 
         state = self._game.step(actions)
 
-        obs = self._match.build_observations(state)
+        obs = self._match.build_observations(state, prev_model_actions)
         done = self._match.is_done(state)
-        reward = self._match.get_rewards(state, done)
+        reward = self._match.get_rewards(state, done, prev_model_actions)
         self._prev_state = state
 
         info = {

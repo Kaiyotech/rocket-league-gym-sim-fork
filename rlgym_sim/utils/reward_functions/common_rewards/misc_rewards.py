@@ -41,7 +41,7 @@ class EventReward(RewardFunction):
         for player in initial_state.players:
             self.last_registered_values[player.car_id] = self._extract_values(player, initial_state)
 
-    def get_reward(self, player: PlayerData, state: GameState, previous_action: np.ndarray, optional_data=None):
+    def get_reward(self, player: PlayerData, state: GameState, previous_action: np.ndarray, previous_model_action: np.ndarray, optional_data=None):
         old_values = self.last_registered_values[player.car_id]
         new_values = self._extract_values(player, state)
 

@@ -9,7 +9,8 @@ class RocketSimGame(object):
     GOAL_THRESHOLD_Y = 5121.75 + 91.25
     DEFAULT_BALL_STATE = rsim.BallState()
 
-    def __init__(self, match, copy_gamestate=True):
+    def __init__(self, match, copy_gamestate=True, visualize=False):
+        self.visualize = visualize
         self.copy_gamestate = copy_gamestate
         self.arena = rsim.Arena(rsim.SOCCAR)
         self.blue_score = 0
@@ -119,7 +120,8 @@ class RocketSimGame(object):
 
         gamestate = self._build_gamestate()
         # print("STEPPING", self.arena.get_cars()[0].get_state().pos)
-        self.arena.step(self.tick_skip)
+        if not self.visualize:
+            self.arena.step(self.tick_skip)
         # print("AFTER STEP",self.arena.get_cars()[0].get_state().pos)
 
         self.cars = self.arena.get_cars()

@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 from setuptools.command.install import install
 
 
-__version__ = "1.0.0"
+__version__ = "1.1.3"
 
 with open('README.md', 'r') as readme_file:
     long_description = readme_file.read()
@@ -19,12 +19,12 @@ setup(
     description='A clone of RLGym for use with RocketSim in reinforcement learning projects.',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    author='Lucas Emery, Matthew Allen, Zealan, and Ntud',
+    author='Lucas Emery, Matthew Allen, Zealan, and Mtheall',
     url='https://github.com/AechPro/rocket-league-gym-sim',
     install_requires=[
         'gym>=0.17',
         'numpy>=1.19',
-        'pyrocketsim @ git+https://github.com/uservar/pyrocketsim@dev'
+        'RocketSim @ git+https://github.com/mtheall/RocketSim@39c54d27c23e273f348034cece22f806f70cf2c3'
     ],
     python_requires='>=3.7',
     cmdclass={'install': CustomInstall},

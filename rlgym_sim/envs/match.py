@@ -94,7 +94,6 @@ class Match(Environment):
         rewards = []
 
         self._reward_fn.pre_step(state)
-
         for i in range(len(state.players)):
             player = state.players[i]
 
@@ -132,7 +131,6 @@ class Match(Environment):
 
     def format_actions(self, actions: np.ndarray):
         self._prev_actions[:len(actions)] = actions[:]
-
         acts = []
         for i in range(len(actions)):
             acts.append(float(self._spectator_ids[i]))

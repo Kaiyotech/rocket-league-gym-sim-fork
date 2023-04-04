@@ -17,7 +17,7 @@ class Gym(Env):
         self._prev_state = None
 
         self._game = RocketSimGame(match, copy_gamestate=copy_gamestate_every_step, dodge_deadzone=dodge_deadzone,
-                                   ,visualize=visualize)
+                                   visualize=visualize)
 
     def reset(self, return_info=False) -> Union[List, Tuple]:
         """

@@ -3,6 +3,7 @@ from rlgym_sim.utils.gamestates import GameState, PhysicsObject
 from rlgym_sim.utils import common_values, math
 from rlgym_sim.simulator import Player
 import numpy as np
+import time
 
 
 class RocketSimGame(object):
@@ -125,6 +126,8 @@ class RocketSimGame(object):
 
         gamestate = self._build_gamestate()
         self.arena.step(self.tick_skip)
+        if self.visualize:
+            time.sleep(1 / 120)
 
         return gamestate
 

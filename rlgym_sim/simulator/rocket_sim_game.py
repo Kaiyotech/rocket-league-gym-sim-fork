@@ -9,13 +9,18 @@ import time
 class RocketSimGame(object):
     DEFAULT_BALL_STATE = rsim.BallState()
 
-    def __init__(self, match, copy_gamestate=True, dodge_deadzone=0.5, visualize=False):
+    def __init__(self, match,
+                 copy_gamestate=True,
+                 dodge_deadzone=0.5,
+                 tick_skip=8,
+                 visualize=False):
         self.visualize = visualize
         self.copy_gamestate = copy_gamestate
         self.arena = rsim.Arena(rsim.GameMode.SOCCAR)
-        self.team_size = match._team_size
-        self.tick_skip = match._tick_skip
-        self.spawn_opponents = match._spawn_opponents
+
+        self.tick_skip = tick_skip
+        self.team_size = match.team_size
+        self.spawn_opponents = match.spawn_opponents
         self.n_agents = self.team_size*2 if self.spawn_opponents else self.team_size
         self.dodge_deadzone = dodge_deadzone
 

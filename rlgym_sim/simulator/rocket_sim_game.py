@@ -137,8 +137,10 @@ class RocketSimGame(object):
     def step(self, controls):
         self._set_controls(controls)
 
+        self.arena.step(1)
         gamestate = self._build_gamestate()
-        self.arena.step(self.tick_skip)
+        if self.tick_skip > 1:
+            self.arena.step(self.tick_skip-1)
         if self.visualize:
             time.sleep(1 / 120)
 

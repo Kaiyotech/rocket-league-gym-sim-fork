@@ -85,7 +85,7 @@ class Match(Environment):
             prev_model_actions = self._blank_model_actions
         rewards = []
 
-        self._reward_fn.pre_step(state)
+        self._reward_fn.pre_step(state, prev_model_actions)
         for i in range(len(state.players)):
             player = state.players[i]
 

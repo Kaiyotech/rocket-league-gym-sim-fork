@@ -83,6 +83,8 @@ class Match(Environment):
     def get_rewards(self, state, done, prev_model_actions=None) -> Union[float, List]:
         if prev_model_actions is None:
             prev_model_actions = self._blank_model_actions
+        elif prev_model_actions.shape[1] > 1:
+            prev_model_actions = prev_model_actions[:, [0]]  # strip non-model actions
         rewards = []
 
         self._reward_fn.pre_step(state, prev_model_actions)

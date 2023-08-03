@@ -16,7 +16,9 @@ except ImportError:
 
 class Gym(Env):
     def __init__(self, match, copy_gamestate_every_step, dodge_deadzone,
-                 tick_skip, gravity, boost_consumption, visualize=False):
+                 tick_skip, gravity, boost_consumption, visualize=False,
+                 random_boost_pad_on_reset=False,
+                 ):
         super().__init__()
 
         self._match = match
@@ -28,7 +30,9 @@ class Gym(Env):
                                    copy_gamestate=copy_gamestate_every_step,
                                    dodge_deadzone=dodge_deadzone,
                                    tick_skip=tick_skip,
-                                   visualize=visualize)
+                                   visualize=visualize,
+                                   random_boost_pad_on_reset=random_boost_pad_on_reset,
+                                   )
 
         self.update_settings(gravity=gravity, boost_consumption=boost_consumption, tick_skip=tick_skip)
 

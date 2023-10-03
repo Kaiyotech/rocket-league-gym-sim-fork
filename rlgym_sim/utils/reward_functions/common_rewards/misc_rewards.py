@@ -80,9 +80,6 @@ class ConstantReward(RewardFunction):
     def reset(self, initial_state: GameState):
         pass
 
-    def pre_step(self, state: GameState, previous_model_action=None):
-        pass
-
     def get_reward(self, player: PlayerData, state: GameState, previous_action: np.ndarray, previous_model_action: np.ndarray) -> float:
         return 1
 

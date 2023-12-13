@@ -33,11 +33,12 @@ class ObsBuilder(ABC):
         """
         raise NotImplementedError
 
-    def pre_step(self, state: GameState):
+    def pre_step(self, state: GameState, previous_actions: np.ndarray):
         """
         Function to pre-compute values each step. This function is called only once each step, before build_obs is
         called for each player.
 
+        :param previous_actions:
         :param state: The current state of the game.
         """
         pass

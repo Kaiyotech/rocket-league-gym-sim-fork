@@ -59,7 +59,7 @@ class Match(Environment):
     def build_observations(self, state) -> Union[Any, List]:
         observations = []
 
-        self._obs_builder.pre_step(state)
+        self._obs_builder.pre_step(state, self._prev_actions[0:len(state.players)])
 
         for i in range(len(state.players)):
             player = state.players[i]
@@ -137,14 +137,15 @@ class Match(Environment):
             empty_player_packets.append(player_packet)
 
         empty_game_state = GameState()
-        prev_inputs = np.zeros(common_values.NUM_ACTIONS)
+        prev_input = np.zeros(common_values.NUM_ACTIONS)
+        prev_inputs = np.zeros((num_cars, common_values.NUM_ACTIONS))
 
         empty_game_state.players = empty_player_packets
 
         self.observation_space = self._obs_builder.get_obs_space()
         if self.observation_space is None:
             self._obs_builder.reset(empty_game_state)
-            self._obs_builder.pre_step(empty_game_state)
-            obs_shape = np.shape(self._obs_builder.build_obs(empty_player_packets[0], empty_game_state, prev_inputs))
+            self._obs_builder.pre_step(empty_game_state, prev_inputs)
+            obs_shape = np.shape(self._obs_builder.build_obs(empty_player_packets[0], empty_game_state, prev_input))
 
             self.observation_space = gym.spaces.Box(-np.inf, np.inf, shape=obs_shape)

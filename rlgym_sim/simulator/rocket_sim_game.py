@@ -12,10 +12,8 @@ class RocketSimGame(object):
     def __init__(self, match,
                  copy_gamestate=True,
                  dodge_deadzone=0.5,
-                 visualize=False,
                  tick_skip=8,
                  random_boost_pad_on_reset=False):
-        self.visualize = visualize
         self.random_boost_pad_on_reset = random_boost_pad_on_reset
         self.copy_gamestate = copy_gamestate
         self.arena = rsim.Arena(rsim.GameMode.SOCCAR)
@@ -50,7 +48,7 @@ class RocketSimGame(object):
 
         self.team_size = team_size
         self.tick_skip = tick_skip
-        # self.spawn_opponents = spawn_opponents
+        self.spawn_opponents = spawn_opponents
         self.n_agents = team_size*2 if spawn_opponents else team_size
 
         # Two loops here so we can make sure the blue cars are always in the first half of the gamestate players list.
@@ -107,10 +105,7 @@ class RocketSimGame(object):
         n_players = (len(state_vals) - idx) // player_len
 
         if n_players != self.n_agents:
-            if n_players == 1:
-                self.new_game(self.tick_skip, 1, 0)
-            else:
-                self.new_game(self.tick_skip, n_players//2 if self.spawn_opponents else n_players, self.spawn_opponents)
+            self.new_game(self.tick_skip, n_players//2 if self.spawn_opponents else n_players, self.spawn_opponents)
 
         cars = self.cars
         if n_players > 0:
@@ -169,8 +164,6 @@ class RocketSimGame(object):
         gamestate = self._build_gamestate()
         if self.tick_skip > 1:
             self.arena.step(self.tick_skip-1)
-        if self.visualize:
-            time.sleep(1 / 120)
 
         return gamestate
 

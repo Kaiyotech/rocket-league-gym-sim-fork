@@ -52,7 +52,8 @@ class GoalScoredCondition(TerminalCondition):
         self.orange_score = 0
 
     def reset(self, initial_state: GameState):
-        pass
+        self.blue_score = initial_state.blue_score
+        self.orange_score = initial_state.orange_score
 
     def is_terminal(self, current_state: GameState) -> bool:
         """
